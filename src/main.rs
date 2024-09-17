@@ -86,7 +86,7 @@ fn delete_venvs(venvs: &[VirtualEnv]) -> Result<()> {
     }
     let total_size_hr = human_bytes(total_size as f32);
     pb.finish_with_message(format!(
-        "All selected virtual environments have been deleted. Total size reclaimed: {}",
+        "All selected virtual environments have been deleted. \n\n Total size reclaimed: {}",
         total_size_hr
     ));
     Ok(())
