@@ -40,7 +40,6 @@ impl fmt::Display for VirtualEnv {
 pub fn get_venv_paths() -> Result<Vec<PathBuf>> {
     let home_dir = home_dir().ok_or_else(|| anyhow!("Could not find home directory"))?;
 
-    // Define virtual environment search paths
     let search_paths = vec![
         // pipx
         home_dir.join(".local/pipx/venvs"),
@@ -61,9 +60,10 @@ pub fn get_venv_paths() -> Result<Vec<PathBuf>> {
         home_dir.join("anaconda3/envs"),
         home_dir.join("miniconda3/envs"),
         home_dir.join("miniforge3/envs"),
-        // mambaforge (Mamba)
         home_dir.join("mambaforge/envs"),
         home_dir.join("mambaforge3/envs"),
+        // pyenv
+        home_dir.join(".pyenv/versions/envs"),
         // asdf
         home_dir.join(".asdf/installs/python"),
         home_dir.join(".asdf/installs/python/versions"),
@@ -71,9 +71,9 @@ pub fn get_venv_paths() -> Result<Vec<PathBuf>> {
         home_dir.join("Library/Enthought/Canopy/edm/envs"),
         // PyCharm (replace with appropriate paths if needed)
         home_dir.join(".PyCharmXXXX.X/config/virtualenvs"),
-        // User-specific custom venv directories
-        home_dir.join("venvs"),
-        home_dir.join(".venvs"),
+        // Additional system locations
+        "/opt/anaconda3/envs".into(),
+        "/opt/miniconda3/envs".into(),
     ];
 
     // Step 1: Canonicalize each search path to resolve symlinks

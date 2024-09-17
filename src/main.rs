@@ -14,10 +14,14 @@ use std::{fs, time::Duration};
 use venvs::{get_venvs, VirtualEnv};
 
 #[derive(Parser)]
-#[command(name = "venv-cleaner")]
+#[command(name = "venvpruner")]
 #[command(author = "Liam Power <liamfpower@gmail.com>")]
 #[command(version = "1.0")]
-#[command(about = "Search and delete Python virtual environments", long_about = None)]
+#[command(
+    about = "Search and delete Python virtual environments at common search paths",
+    long_about = "Search and delete Python virtual environments at common search paths."
+)]
+
 struct Cli {}
 
 fn select_venvs_to_delete(venvs: &Vec<VirtualEnv>) -> Result<Vec<VirtualEnv>> {
