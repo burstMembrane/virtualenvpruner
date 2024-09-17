@@ -185,7 +185,7 @@ pub fn build_virtualenv(path: PathBuf) -> Result<VirtualEnv> {
             // Check if the symlink target exists
             if !symlinked_path.exists() {
                 // we're missing the linked python executable
-                // notify of broken symlink
+                // notify of broken symlink or remove?
 
                 // std::fs::remove_file(&bin_dir.join("python")).with_context(|| {
                 //     format!("Failed to remove symlink: {}", python_path.display())
