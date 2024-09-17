@@ -75,14 +75,12 @@ fn delete_venvs(venvs: &[VirtualEnv]) -> Result<()> {
 }
 
 fn main() -> Result<()> {
-    let cli = Cli::parse();
+    let _cli = Cli::parse();
 
     let progress_bar = Arc::new(ProgressBar::new_spinner());
     progress_bar.set_style(ProgressStyle::with_template("{spinner:.green} {msg}").unwrap());
     progress_bar.set_message("Searching for virtual environments...");
     progress_bar.enable_steady_tick(Duration::from_millis(100));
-
-    let mut venvs_cache: Option<Vec<VirtualEnv>> = None;
 
     loop {
         let mut venvs = get_venvs().context("Failed to search for virtual environments")?;
@@ -126,8 +124,6 @@ fn main() -> Result<()> {
             println!("All virtual environments have been deleted.");
             break;
         }
-
-        venvs_cache = Some(remaining_venvs);
 
         let repeat = Confirm::new("Do you want to delete more virtual environments?")
             .with_default(false)
