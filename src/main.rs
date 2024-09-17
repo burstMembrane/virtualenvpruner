@@ -47,7 +47,7 @@ fn confirm_deletion() -> Result<bool> {
 
 fn delete_venvs(venvs: &[VirtualEnv]) -> Result<()> {
     // Provide a custom bar style
-    let pb = ProgressBar::new(1000);
+    let pb = ProgressBar::new(venvs.len() as u64);
     let mut total_size: u64 = 0;
     pb.set_style(
         ProgressStyle::with_template(
@@ -63,7 +63,7 @@ fn delete_venvs(venvs: &[VirtualEnv]) -> Result<()> {
         ));
         fs::remove_dir_all(&venv.path)
             .with_context(|| format!("Failed to delete {}", venv.path.display()))?;
-
+        pb.inc(1);
         total_size += venv.venv_size;
     }
     let total_size_hr = human_bytes(total_size as f32);
