@@ -831,6 +831,7 @@ dependencies = [
  "anyhow",
  "bytesize",
  "clap",
+ "console",
  "dirs",
  "du",
  "glob",
